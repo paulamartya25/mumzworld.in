@@ -88,41 +88,111 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- ANIMATED TITLE AND SLOGANS ---
-st.markdown('<div style="text-align: center; margin-bottom: 20px;"><h2 style="color: #FF1493; font-size: 2.5em; margin: 0;">🎉 Welcome to Mumzworld! 🎉</h2></div>', unsafe_allow_html=True)
+# Language selection at the top
+col_lang1, col_lang2, col_lang3 = st.columns([1, 3, 1])
+with col_lang2:
+    selected_language = st.radio(
+        "🌍 Select Language | اختر اللغة:",
+        ["English 🇬🇧", "العربية 🇸🇦", "Both 🌐"],
+        horizontal=True,
+        key="language_selector"
+    )
 
-st.markdown('<h1 class="animated-title">👶 Smart Parenting Assistant</h1>', unsafe_allow_html=True)
+st.markdown("---")
 
-# Rotating catchy slogans
-slogans_list = [
-    "✨ Because every mom deserves a little magic! ✨",
-    "💝 Your baby, your love, our support!",
-    "🌟 Every milestone matters - we're here for all of them!",
-    "👶 From newborns to toddlers - we've got you covered!",
-    "🛍️ Shop Smarter, Parent Better! 🧸",
-    "💕 Making motherhood moments magical!",
-    "🌈 Where parenting meets possibility!",
-    "👨‍👩‍👧‍👦 Family first, always!",
-]
+# Bilingual content dictionaries
+content_en = {
+    "welcome": "🎉 Welcome to Mumzworld! 🎉",
+    "title": "👶 Smart Parenting Assistant",
+    "slogans": [
+        "✨ Because every mom deserves a little magic! ✨",
+        "💝 Your baby, your love, our support!",
+        "🌟 Every milestone matters - we're here for all of them!",
+        "👶 From newborns to toddlers - we've got you covered!",
+        "🛍️ Shop Smarter, Parent Better! 🧸",
+        "💕 Making motherhood moments magical!",
+        "🌈 Where parenting meets possibility!",
+        "👨‍👩‍👧‍👦 Family first, always!",
+    ],
+    "tagline": "🏪 Your One-Stop Shop for All Baby Needs 🏪",
+    "description": "Not sure what to buy? Tell us about your baby's current stage or your situation, and we'll curate a list of essentials for you!",
+    "example": "Example: 'My 6-month-old is starting to eat solid foods. What equipment do I need?'",
+    "input_label": "💭 What's your baby concern?",
+    "arabic_checkbox": "🌍 Also display the response in Arabic",
+    "button_text": "Get Product Recommendations 🚀",
+}
 
+content_ar = {
+    "welcome": "🎉 أهلا وسهلا بك في مامز وورلد! 🎉",
+    "title": "👶 مساعد الأبوة والأمومة الذكي",
+    "slogans": [
+        "✨ لأن كل أم تستحق قليلاً من السحر! ✨",
+        "💝 طفلك، حبك، دعمنا!",
+        "🌟 كل مرحلة مهمة - نحن هنا من أجلك!",
+        "👶 من حديثي الولادة إلى الأطفال الصغار - نحن نغطيك!",
+        "🛍️ تسوقي بذكاء، كوني أماً أفضل! 🧸",
+        "💕 صنع لحظات الأمومة سحرية!",
+        "🌈 حيث تلتقي الأبوة بالإمكانية!",
+        "👨‍👩‍👧‍👦 العائلة أولاً، دائماً!",
+    ],
+    "tagline": "🏪 متجرك الشامل لجميع احتياجات طفلك 🏪",
+    "description": "غير متأكدة مما تشترين؟ أخبرينا عن مرحلة طفلك الحالية أو وضعك، وسنختار لك قائمة بالضروريات!",
+    "example": "مثال: 'طفلي البالغ من العمر 6 أشهر يبدأ في تناول الأطعمة الصلبة. ما المعدات التي أحتاجها؟'",
+    "input_label": "💭 ما هي مخاوف طفلك؟",
+    "arabic_checkbox": "🌍 عرض الرد أيضاً باللغة العربية",
+    "button_text": "احصل على التوصيات 🚀",
+}
+
+# Display content based on language selection
 import random
-selected_slogan = random.choice(slogans_list)
-st.markdown(f'<p class="slogan-text">{selected_slogan}</p>', unsafe_allow_html=True)
 
-st.markdown('<p style="text-align: center; color: #000000; font-size: 1.1em; margin-top: -15px;"><b>🏪 Your One-Stop Shop for All Baby Needs 🏪</b></p>', unsafe_allow_html=True)
+if selected_language in ["English 🇬🇧", "Both 🌐"]:
+    st.markdown(f'<div style="text-align: center; margin-bottom: 20px;"><h2 style="color: #FF1493; font-size: 2.5em; margin: 0;">{content_en["welcome"]}</h2></div>', unsafe_allow_html=True)
+    st.markdown(f'<h1 class="animated-title">{content_en["title"]}</h1>', unsafe_allow_html=True)
+    selected_slogan_en = random.choice(content_en["slogans"])
+    st.markdown(f'<p class="slogan-text">{selected_slogan_en}</p>', unsafe_allow_html=True)
+    st.markdown(f'<p style="text-align: center; color: #000000; font-size: 1.1em; margin-top: -15px;"><b>{content_en["tagline"]}</b></p>', unsafe_allow_html=True)
+    st.write(content_en["description"])
 
-st.write("Not sure what to buy? Tell us about your baby's current stage or your situation, and we'll curate a list of essentials for you!")
+if selected_language == "Both 🌐":
+    st.markdown("---")
+
+if selected_language in ["العربية 🇸🇦", "Both 🌐"]:
+    st.markdown(f'<div style="text-align: center; margin-bottom: 20px; direction: rtl;"><h2 style="color: #FF1493; font-size: 2.5em; margin: 0;">{content_ar["welcome"]}</h2></div>', unsafe_allow_html=True)
+    st.markdown(f'<h1 class="animated-title" style="direction: rtl;">{content_ar["title"]}</h1>', unsafe_allow_html=True)
+    selected_slogan_ar = random.choice(content_ar["slogans"])
+    st.markdown(f'<p class="slogan-text" style="direction: rtl;">{selected_slogan_ar}</p>', unsafe_allow_html=True)
+    st.markdown(f'<p style="text-align: center; color: #000000; font-size: 1.1em; margin-top: -15px; direction: rtl;"><b>{content_ar["tagline"]}</b></p>', unsafe_allow_html=True)
+    st.markdown(f'<p style="color: #000000; direction: rtl; text-align: right;">{content_ar["description"]}</p>')
+
+st.markdown("---")
+
+# --- USER INPUT SECTION ---
+if selected_language in ["English 🇬🇧", "Both 🌐"]:
+    st.write(content_en["example"])
+
+if selected_language == "Both 🌐":
+    st.write(content_ar["example"])
+elif selected_language == "العربية 🇸🇦":
+    st.markdown(f'<p style="color: #000000; direction: rtl; text-align: right;">{content_ar["example"]}</p>')
 
 # User input box
-user_input = st.text_area("Example: 'My 6-month-old is starting to eat solid foods. What equipment do I need?'", height=100)
+user_input = st.text_area(
+    "💭 What's your baby concern?" if selected_language in ["English 🇬🇧", "Both 🌐"] else "💭 ما هي مخاوف طفلك؟",
+    placeholder="Example: 'My 6-month-old is starting to eat solid foods. What equipment do I need?'" if selected_language in ["English 🇬🇧", "Both 🌐"] else "مثال: 'طفلي البالغ من العمر 6 أشهر يبدأ في تناول الأطعمة الصلبة. ما المعدات التي أحتاجها؟'",
+    height=100
+)
 
 # Add a checkbox for the Arabic translation option
-show_arabic = st.checkbox("🌍 Also display the response in Arabic")
+show_arabic = st.checkbox(
+    "🌍 Also display the response in Arabic" if selected_language in ["English 🇬🇧", "Both 🌐"] else "🌍 عرض الرد أيضاً باللغة العربية"
+)
 
 # What happens when they click the button
-if st.button("Get Product Recommendations 🚀"):
+button_label = content_en["button_text"] if selected_language in ["English 🇬🇧", "Both 🌐"] else content_ar["button_text"]
+if st.button(button_label):
     if user_input:
-        with st.spinner("Analyzing your needs and translating..."):
+        with st.spinner("Analyzing your needs and translating..." if selected_language in ["English 🇬🇧", "Both 🌐"] else "جاري تحليل احتياجاتك وترجمتها..."):
             
             # The core prompt telling the AI how to act
             prompt = f"""
@@ -165,7 +235,8 @@ if st.button("Get Product Recommendations 🚀"):
                     model="llama-3.3-70b-versatile", 
                 )
                 
-                st.success("✨ Here are your recommendations!")
+                success_message = "✨ Here are your recommendations!" if selected_language in ["English 🇬🇧", "Both 🌐"] else "✨ إليك التوصيات الخاصة بك!"
+                st.success(success_message)
                 # Display the response in a styled container with black text
                 recommendations = chat_completion.choices[0].message.content
                 st.markdown(f'<div style="background-color: white; padding: 20px; border-radius: 10px; border-left: 5px solid #FF69B4; color: #000000;"><p style="color: #000000;">{recommendations}</p></div>', unsafe_allow_html=True)
@@ -173,4 +244,5 @@ if st.button("Get Product Recommendations 🚀"):
             except Exception as e:
                 st.error(f"An error occurred: {e}")
     else:
-        st.warning("Please type a situation in the box above first.")
+        warning_message = "Please type a situation in the box above first." if selected_language in ["English 🇬🇧", "Both 🌐"] else "يرجى كتابة الوضع في الصندوق أعلاه أولاً."
+        st.warning(warning_message)
