@@ -163,7 +163,6 @@ if selected_language in ["العربية 🇸🇦", "Both 🌐"]:
     selected_slogan_ar = random.choice(content_ar["slogans"])
     st.markdown(f'<p class="slogan-text" style="direction: rtl;">{selected_slogan_ar}</p>', unsafe_allow_html=True)
     st.markdown(f'<p style="text-align: center; color: #000000; font-size: 1.1em; margin-top: -15px; direction: rtl;"><b>{content_ar["tagline"]}</b></p>', unsafe_allow_html=True)
-    st.markdown(f'<p style="color: #000000; direction: rtl; text-align: right;">{content_ar["description"]}</p>')
 
 st.markdown("---")
 
