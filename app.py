@@ -225,9 +225,9 @@ if st.button(button_label):
                 
                 success_message = "✨ Here are your recommendations!" if selected_language in ["English 🇬🇧", "Both 🌐"] else "✨ إليك التوصيات الخاصة بك!"
                 st.success(success_message)
-                # Display the response in a styled container with black background and pink accents
+                # Display the response in a styled container with black text
                 recommendations = chat_completion.choices[0].message.content
-                st.markdown(f'<div style="background-color: #1a1a1a; padding: 20px; border-radius: 10px; border-left: 5px solid #FF69B4; color: #FFFFFF;"><p style="color: #FFFFFF;">{recommendations}</p></div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="background-color: white; padding: 20px; border-radius: 10px; border-left: 5px solid #FF69B4; color: #000000;"><p style="color: #000000;">{recommendations}</p></div>', unsafe_allow_html=True)
                 
             except Exception as e:
                 st.error(f"An error occurred: {e}")
