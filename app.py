@@ -116,7 +116,6 @@ content_en = {
     ],
     "tagline": "🏪 Your One-Stop Shop for All Baby Needs 🏪",
     "description": "Not sure what to buy? Tell us about your baby's current stage or your situation, and we'll curate a list of essentials for you!",
-    "example": "Example: 'My 6-month-old is starting to eat solid foods. What equipment do I need?'",
     "input_label": "💭 What's your baby concern?",
     "arabic_checkbox": "🌍 Also display the response in Arabic",
     "button_text": "Get Product Recommendations 🚀",
@@ -137,7 +136,6 @@ content_ar = {
     ],
     "tagline": "🏪 متجرك الشامل لجميع احتياجات طفلك 🏪",
     "description": "غير متأكدة مما تشترين؟ أخبرينا عن مرحلة طفلك الحالية أو وضعك، وسنختار لك قائمة بالضروريات!",
-    "example": "مثال: 'طفلي البالغ من العمر 6 أشهر يبدأ في تناول الأطعمة الصلبة. ما المعدات التي أحتاجها؟'",
     "input_label": "💭 ما هي مخاوف طفلك؟",
     "arabic_checkbox": "🌍 عرض الرد أيضاً باللغة العربية",
     "button_text": "احصل على التوصيات 🚀",
@@ -167,18 +165,9 @@ if selected_language in ["العربية 🇸🇦", "Both 🌐"]:
 st.markdown("---")
 
 # --- USER INPUT SECTION ---
-if selected_language in ["English 🇬🇧", "Both 🌐"]:
-    st.write(content_en["example"])
-
-if selected_language == "Both 🌐":
-    st.write(content_ar["example"])
-elif selected_language == "العربية 🇸🇦":
-    st.markdown(f'<p style="color: #000000; direction: rtl; text-align: right;">{content_ar["example"]}</p>')
-
 # User input box
 user_input = st.text_area(
     "💭 What's your baby concern?" if selected_language in ["English 🇬🇧", "Both 🌐"] else "💭 ما هي مخاوف طفلك؟",
-    placeholder="Example: 'My 6-month-old is starting to eat solid foods. What equipment do I need?'" if selected_language in ["English 🇬🇧", "Both 🌐"] else "مثال: 'طفلي البالغ من العمر 6 أشهر يبدأ في تناول الأطعمة الصلبة. ما المعدات التي أحتاجها؟'",
     height=100
 )
 
@@ -236,9 +225,9 @@ if st.button(button_label):
                 
                 success_message = "✨ Here are your recommendations!" if selected_language in ["English 🇬🇧", "Both 🌐"] else "✨ إليك التوصيات الخاصة بك!"
                 st.success(success_message)
-                # Display the response in a styled container with black text
+                # Display the response in a styled container with black background and pink accents
                 recommendations = chat_completion.choices[0].message.content
-                st.markdown(f'<div style="background-color: white; padding: 20px; border-radius: 10px; border-left: 5px solid #FF69B4; color: #000000;"><p style="color: #000000;">{recommendations}</p></div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="background-color: #1a1a1a; padding: 20px; border-radius: 10px; border-left: 5px solid #FF69B4; color: #FFFFFF;"><p style="color: #FFFFFF;">{recommendations}</p></div>', unsafe_allow_html=True)
                 
             except Exception as e:
                 st.error(f"An error occurred: {e}")
